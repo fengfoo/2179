@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malaysia Economy, Income and Poverty</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    
+    <style>
+        body, .section-desc, .chart-caption, .apa-ref { 
+            font-family: Georgia, 'Times New Roman', Times, serif; 
+            color: #333;
+        }
+        
+        h1, h2, h3, .section-title, .chart-caption strong, .footer-info {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #2c3e50;
+        }
+        
+        /* for layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .center { text-align: center; }
+        .section-title { margin-top: 50px; margin-bottom: 5px; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.8em; }
+        .section-desc { color: #555; margin-bottom: 25px; font-size: 1.1em; line-height: 1.6; }
+        .chart-box { padding: 15px; box-sizing: border-box; }
+        
+        /* for captions */
+        .chart-caption { font-size: 0.95em; color: #444; margin-top: 10px; text-align: justify; line-height: 1.6; padding: 0 5px; }
+        .chart-caption strong { color: #222; }
+
+        /* for references */
+        .references-section { margin-top: 60px; padding: 30px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #eaeaea; }
+        .references-section h2 { margin-top: 0; color: #2c3e50; }
+        .apa-ref { padding-left: 36px; text-indent: -36px; margin-bottom: 15px; color: #444; line-height: 1.6; font-size: 0.9em; }
+        .footer-info { margin-top: 40px; border-top: 2px solid #ddd; padding-top: 20px; padding-bottom: 40px; text-align: center; color: #555; font-weight: bold; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="pure-g container">
+        
+        <div class="pure-u-1 center">
+            <h1 style="font-size: 2.5em; margin-bottom: 10px; color: #222;">Malaysia Economy, Income and Poverty</h1>
+            <p class="section-desc">A visualisation that is exploring the distribution of household income, macroeconomic growth, and geographic poverty in Malaysia from 1970 to 2022.</p>
+        </div>
+
+        <div class="pure-u-1">
+            <h2 class="section-title">1. Macroeconomic Situation</h2>
+            <p class="section-desc">First, we are tracking year-over-year national income growth with a waterfall chart and compare national wealth against localized poverty rates.</p>
+        </div>
+        
+        <div class="pure-u-1-2 chart-box">
+            <div id="chart8"></div>
+            <p class="chart-caption"><strong>Year-over-Year Waterfall</strong> visualizes cumulative national income per capita. <strong>Orange drops</strong> represent financial contractions during the 1998 Asian Financial Crisis and 2020 COVID-19 pandemic. We can see that income is on a steady rise over time, except drops during the financial crisis and pandemic.</p>
+        </div>
+        <div class="pure-u-1-2 chart-box">
+            <div id="chart9"></div>
+            <p class="chart-caption"><strong>Dual-Axis Wealth vs Poverty chart:</strong> The blue area maps national wealth and the <strong>orange line</strong> tracks state absolute poverty. The overall pattern is that national income is on a steady increase as aboslute poverty is on a decrease, except an exception during the <strong>2020 COVID-19 shock</strong>, where national income dropped and poverty spiked.</p>
+        </div>
+
+        <div class="pure-u-1">
+            <h2 class="section-title">2. Household Income & Percentile Wealth Gap</h2>
+            <p class="section-desc">National wealth is not distributed evenly among households. The widening gap between mean and median income indicates growing wealth inequality over time.</p>
+        </div>
+        
+        <div class="pure-u-1-2 chart-box">
+            <div id="chart2"></div>
+            <p class="chart-caption">This connected scatterplot maps median against mean income chronologically. The steep upward trajectory shows the <strong>mean growing faster than the median</strong>. The top right looping back tracks the drop and recovery of incomes during the 2020 pandemic.</p>
+        </div>
+        <div class="pure-u-1-2 chart-box">
+            <div id="chart4"></div>
+            <p class="chart-caption">This area chart shows that the <strong>income gap has been on the rise </strong> over the past few decades. The rich are getting richer while the poor are getting poorer.</p>
+        </div>
+        
+        <div class="pure-u-1-2 chart-box">
+            <div id="chart6"></div>
+            <p class="chart-caption">This is a <strong> Lorenz Curve </strong> that shows how income or wealth is distributed across a population. The further the curve sags from the diagonal, the higher the level of inequality.Ideally, the bottom 20% would own exactly 20% of the wealth, and bottom 50% would own 50%, etc. However in Malaysia, the <strong>bottom 80% of Malaysian households only share about half of the nation's total income</strong>, while the top 20% (known as T20) captures the other half.</p>
+        </div>
+        <div class="pure-u-1-2 chart-box">
+            <div id="chart7"></div>
+            <p class="chart-caption"><strong>This poverty slopegraph</strong> compares absolute poverty rates between 1989 and 2022. Crossing lines indicate states that reduced poverty faster than others. All countries have had a decrease in absolute poverty over time, with the most noticable being <strong>Terengganu</strong>, from 31.2% in 1989 to 6.2% in 2022.</p>
+        </div>
+
+        <div class="pure-u-1">
+            <h2 class="section-title">3. Tracking Poverty</h2>
+            <p class="section-desc">Some important definitions: <strong>Absolute poverty</strong> measures those lacking basic survival needs, while <strong>relative poverty</strong> measures those falling behind the national median. The gap between these metrics highlights different economic realities.</p>
+        </div>
+        
+        <div class="pure-u-1 chart-box">
+            <div id="chart10"></div>
+            <p class="chart-caption" style="text-align: center;"><strong>This Dumbbell Plot </strong> highlights the gap between absolute and relative poverty. This shows that <strong>wealthier states can still exhibit high relative poverty, as seen in Selangor and other cities, </strong>despite low absolute poverty.</p>
+        </div>
+
+        <div class="pure-u-1">
+            <h2 class="section-title">4. Differences seen in States in Malaysia</h2>
+            <p class="section-desc">Economic success varies by location. The West Coast of Peninsular Malaysia generally records higher incomes and lower poverty rates compared to the East Coast and East Malaysia.</p>
+        </div>
+        
+        <div class="pure-u-1 chart-box">
+            <div class="center" id="map_chart"></div>
+            <p class="chart-caption" style="text-align: center;"><strong>This layered Choropleth Map</strong> shows the unequal geographic distribution of poverty. East Malaysian states like Sabah record a higher poverty burden compared to the West Coast, since 1989 till 2022. </p>
+        </div>
+        
+        <div class="pure-u-1 chart-box">
+            <div id="chart3"></div>
+            <p class="chart-caption" style="text-align: center;"><strong>A diverging Lollipop Chart</strong> compares state poverty rates against the 2022 national average. Blue lines indicate states outperforming the average, and orange lines indicate states falling behind. The correlation that can be seen here is that <strong>cities are generally more economically developed than rural areas.</strong></p>
+        </div>
+        
+        <div class="pure-u-1 chart-box">
+            <div id="chart5"></div>
+            <p class="chart-caption" style="text-align: center;"><strong>This streamgraph</strong> displays the volume of absolute poverty over time. Policy interventions like the 1971 NEP correlate with poverty reduction, while external shocks like the 1998 Asian Financial Crisis and 2020 COVID-19 pandemic correlate with poverty spikes.</p>
+        </div>
+
+        <div class="pure-u-1 references-section">
+            <h2>References</h2>
+            <p class="apa-ref">Department of Statistics Malaysia. (n.d.). <em>Household income by state</em> [Data set]. OpenDOSM. Retrieved May 6, 2026, from https://open.dosm.gov.my/data-catalogue/hies_state?visual=table</p>
+            <p class="apa-ref">Department of Statistics Malaysia. (n.d.). <em>Household income by percentile</em> [Data set]. OpenDOSM. Retrieved May 6, 2026, from https://open.dosm.gov.my/data-catalogue/hies_malaysia_percentile</p>
+            <p class="apa-ref">Department of Statistics Malaysia. (n.d.). <em>Household poverty</em> [Data set]. OpenDOSM. Retrieved May 6, 2026, from https://open.dosm.gov.my/data-catalogue/hh_poverty</p>
+            <p class="apa-ref">Newbery, J. (n.d.). <em>malaysia-states.topojson</em> [Data set]. GitHub. Retrieved May 6, 2026, from https://github.com/jnewbery/CartogramMalaysia/blob/master/public/data/malaysia-states.topojson</p>
+            <p class="apa-ref">World Bank Group. (n.d.). <em>Adjusted net national income per capita (current US$)</em> [Data set]. World Bank Open Data. Retrieved May 6, 2026, from https://data.worldbank.org/indicator/NY.ADJ.NNTY.PC.CD</p>
+        </div>
+
+        <div class="pure-u-1 footer-info">
+            Student Name: Foo Jian Feng <br>
+            Student ID: 35172495 <br>
+            Assignment: FIT2179 DV2 <br> <br>
+            All work is my own, except where I have cited sources. Do not reuse, copy or recreate this file for any reasons whatsoever. All rights reserved.
+        </div>
+
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
