@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "Shrinking Volume of Poverty (1970 - 2022)",
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/hh_poverty_state.csv"
+      },
+      "transform": [
+        {"calculate": "datetime(substring(datum.date, 0, 4), 0, 1)", "as": "Year_Parsed"},
+        {"filter": "datum.poverty_absolute != null"}
+      ],
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "line": {"color": "white", "size": 0.5}
+      },
+      "encoding": {
+        "x": {
+          "field": "Year_Parsed",
+          "type": "temporal",
+          "title": "Year",
+          "axis": {"grid": false, "domain": false, "tickSize": 0}
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative",
+          "stack": "center",
+          "axis": null
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "scale": {
+            "range": ["#0072B2", "#56B4E9", "#D55E00", "#E69F00", "#F0E442", "#CC79A7", "#999999", "#1A1A1A", "#4E79A7", "#F28E2B", "#B07AA1", "#FF9DA7", "#9C755F", "#BAB0AC", "#4B0082", "#000080"]
+          },
+          "title": "State"
+        },
+        "tooltip": [
+          {"field": "Year_Parsed", "timeUnit": "year", "title": "Year"},
+          {"field": "state", "title": "State"},
+          {"field": "poverty_absolute", "title": "Poverty Rate (%)"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"Year_Parsed": "1971-01-01", "label": "1971: NEP Launched", "dy": -130, "dx": 5, "align": "left"},
+          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis", "dy": -130, "dx": -5, "align": "right"},
+          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19 Shock", "dy": -110, "dx": -5, "align": "right"}
+        ]
+      },
+      "mark": {"type": "rule", "color": "#333", "strokeDash": [4, 4], "size": 1.5},
+      "encoding": {
+        "x": {"field": "Year_Parsed", "type": "temporal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"Year_Parsed": "1971-01-01", "label": "1971: NEP Launched", "dy": -130, "dx": 5, "align": "left"},
+          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis", "dy": -130, "dx": -5, "align": "right"},
+          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19", "dy": 120, "dx": -5, "align": "right"}
+        ]
+      },
+      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "color": "#333"},
+      "encoding": {
+        "x": {"field": "Year_Parsed", "type": "temporal"},
+        "y": {"value": 10},
+        "text": {"field": "label"},
+        "align": {"field": "align", "type": "nominal"},
+        "dx": {"field": "dx", "type": "quantitative"}
+      }
+    }
+  ]
+}

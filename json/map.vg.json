@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 400,
+  "title": "Absolute Poverty Rate by State in Malaysia",
+  "projection": {"type": "mercator"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2022,
+      "bind": {
+        "input": "range",
+        "min": 1970,
+        "max": 2022,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/hh_poverty_state.csv"
+  },
+  "transform": [
+    {
+      "filter": "year(datum.date) == Year_selection"
+    },
+    {
+      "lookup": "state", 
+      "from": {
+        "data": {
+          "url": "data/malaysia-states.topojson",
+          "format": {"type": "topojson", "feature": "states"}
+        },
+        "key": "properties.Name" 
+      },
+      "as": "geo"
+    }
+  ],
+  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+  "encoding": {
+    "shape": {"field": "geo", "type": "geojson"},
+    "color": {
+      "field": "poverty_absolute",
+      "type": "quantitative",
+      "scale": {"scheme": "oranges"},
+      "title": "Absolute Poverty (%)"
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "poverty_absolute", "type": "quantitative", "title": "Poverty Rate (%)", "format": ".1f"}
+    ]
+  }
+}

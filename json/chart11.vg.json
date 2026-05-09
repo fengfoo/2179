@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "Adjusted Net National Income per Capita",
+  "data": {
+    "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/worldbank_my_long.csv"
+  },
+  "mark": {
+    "type": "line",
+    "point": true,
+    "color": "#ff7f0e",
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "temporal",
+      "title": "Year",
+      "axis": {"grid": false}
+    },
+    "y": {
+      "field": "Income",
+      "type": "quantitative",
+      "title": "Income (Current US$)"
+    },
+    "tooltip": [
+      {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Year"},
+      {"field": "Income", "type": "quantitative", "title": "Income (US$)", "format": ",.2f"}
+    ]
+  }
+}

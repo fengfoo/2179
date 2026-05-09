@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Long-Term Shift in Poverty (1989 vs 2022)",
+  "data": {
+    "url": "data/hh_poverty_state.csv"
+  },
+  "transform": [
+    {
+      "calculate": "substring(datum.date, 0, 4)",
+      "as": "Year_String"
+    },
+    {
+      "filter": "datum.Year_String == '1989' || datum.Year_String == '2022'"
+    },
+    {
+      "filter": "datum.poverty_absolute != null"
+    }
+  ],
+  "layer": [
+    {
+      "encoding": {
+        "x": {
+          "field": "Year_String",
+          "type": "ordinal",
+          "title": null,
+          "scale": {"padding": 0.1},
+          "axis": {"labelFontSize": 14, "labelFontWeight": "bold", "grid": true}
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative",
+          "title": "Absolute Poverty Rate (%)"
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#0072B2", "#56B4E9", "#D55E00", "#E69F00", 
+              "#F0E442", "#CC79A7", "#999999", "#1A1A1A", 
+              "#4E79A7", "#F28E2B", "#B07AA1", "#FF9DA7", 
+              "#9C755F", "#BAB0AC", "#4B0082", "#000080"
+            ]
+          },
+          "title": "State"
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "Year_String", "type": "ordinal", "title": "Year"},
+          {"field": "poverty_absolute", "type": "quantitative", "title": "Poverty Rate (%)", "format": ".1f"}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {"type": "line", "size": 3, "opacity": 0.6}
+        },
+        {
+          "mark": {"type": "point", "filled": true, "size": 80, "opacity": 1}
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [{"Year_String": "1989", "start_point": 31.2, "end_point": 34}]
+      },
+      "mark": {"type": "rule", "color": "#CC79A7", "size": 1.5, "strokeDash": [2, 2]},
+      "encoding": {
+        "x": {"field": "Year_String", "type": "ordinal"},
+        "y": {"field": "start_point", "type": "quantitative"},
+        "y2": {"field": "end_point"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"Year_String": "1989", "end_point": 34, "label": "Terengganu's massive 25% reduction"}]
+      },
+      "mark": {"type": "text", "align": "left", "dx": 5, "dy": 0, "fontSize": 11, "fontWeight": "bold", "color": "#CC79A7"},
+      "encoding": {
+        "x": {"field": "Year_String", "type": "ordinal"},
+        "y": {"field": "end_point", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"threshold": 10}]
+      },
+      "mark": {"type": "rule", "color": "#D55E00", "strokeDash": [4, 4], "size": 2},
+      "encoding": {
+        "y": {"field": "threshold", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"Year_String": "1989", "threshold": 10, "label": "10% Poverty Threshold"}]
+      },
+      "mark": {"type": "text", "align": "left", "dx": 5, "dy": -8, "fontSize": 11, "fontWeight": "bold", "color": "#D55E00"},
+      "encoding": {
+        "x": {"field": "Year_String", "type": "ordinal"},
+        "y": {"field": "threshold", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}

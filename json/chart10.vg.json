@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "Absolute vs Relative Poverty Gap by State (2022)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/hh_poverty_state.csv"
+  },
+  "transform": [
+    {"filter": "substring(datum.date, 0, 4) == '2022'"},
+    {"fold": ["poverty_absolute", "poverty_relative"], "as": ["Poverty_Raw", "Rate"]},
+    {"filter": "datum.Rate != null"},
+    {
+      "calculate": "datum.Poverty_Raw == 'poverty_absolute' ? 'Absolute Poverty' : 'Relative Poverty'",
+      "as": "Poverty Type"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State",
+      "axis": {"labelAngle": -45},
+      "sort": {"op": "max", "field": "Rate", "order": "descending"}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "rule", "color": "#a1a1a1", "size": 3},
+      "encoding": {
+        "y": {"aggregate": "min", "field": "Rate", "type": "quantitative"},
+        "y2": {"aggregate": "max", "field": "Rate", "type": "quantitative"}
+      }
+    },
+    {
+      "mark": {"type": "point", "size": 120, "opacity": 1, "filled": true},
+      "encoding": {
+        "y": {
+          "field": "Rate",
+          "type": "quantitative",
+          "title": "Poverty Rate (%)"
+        },
+        "color": {
+          "field": "Poverty Type",
+          "type": "nominal",
+          "scale": {"range": ["#D55E00", "#0072B2"]},
+          "title": "Metric"
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "Poverty Type", "type": "nominal", "title": "Type"},
+          {"field": "Rate", "type": "quantitative", "title": "Rate (%)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [{"state": "Selangor", "start_point": 14.2, "end_point": 22}]
+      },
+      "mark": {"type": "rule", "color": "#333", "size": 1, "strokeDash": [2, 2]},
+      "encoding": {
+        "x": {"field": "state", "type": "nominal"},
+        "y": {"field": "start_point", "type": "quantitative"},
+        "y2": {"field": "end_point"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"state": "Selangor", "end_point": 22, "label": "Severe urban inequality gap"}]
+      },
+      "mark": {"type": "text", "align": "center", "dy": -8, "fontSize": 11, "fontWeight": "bold", "color": "#333"},
+      "encoding": {
+        "x": {"field": "state", "type": "nominal"},
+        "y": {"field": "end_point", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}

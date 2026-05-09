@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "State Poverty vs National Average (2022)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/hh_poverty_state.csv"
+  },
+  "transform": [
+    {"filter": "substring(datum.date, 0, 4) == '2022'"},
+    {"filter": "datum.poverty_absolute != null"},
+    {
+      "joinaggregate": [{"op": "mean", "field": "poverty_absolute", "as": "National_Average"}]
+    },
+    {
+      "calculate": "datum.poverty_absolute - datum.National_Average",
+      "as": "Deviation"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": {"field": "Deviation", "order": "descending"}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "rule", "size": 2},
+      "encoding": {
+        "x": {"field": "Deviation", "type": "quantitative", "title": "Percentage Points from Average"},
+        "x2": {"datum": 0},
+        "color": {
+          "condition": {"test": "datum.Deviation > 0", "value": "#D55E00"},
+          "value": "#0072B2"
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 100},
+      "encoding": {
+        "x": {"field": "Deviation", "type": "quantitative"},
+        "color": {
+          "condition": {"test": "datum.Deviation > 0", "value": "#D55E00"},
+          "value": "#0072B2"
+        },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "poverty_absolute", "title": "Absolute Poverty (%)", "format": ".1f"},
+          {"field": "Deviation", "title": "Deviation from Avg", "format": "+.2f"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"Deviation": -0.5, "state": "Sabah", "label": "<-- Outperforming National Average"}]},
+      "mark": {"type": "text", "align": "right", "dy": -12, "color": "#0072B2", "fontWeight": "bold", "fontSize": 11},
+      "encoding": {
+        "x": {"field": "Deviation", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"Deviation": 0.5, "state": "Sabah", "label": "Falling Behind National Average -->"}]},
+      "mark": {"type": "text", "align": "left", "dy": -12, "color": "#D55E00", "fontWeight": "bold", "fontSize": 11},
+      "encoding": {
+        "x": {"field": "Deviation", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}

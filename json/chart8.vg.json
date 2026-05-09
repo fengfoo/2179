@@ -1,0 +1,56 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "National Income Accumulation",
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/worldbank_my_long.csv"
+      },
+      "transform": [
+        {
+          "window": [{"op": "lag", "field": "Income", "as": "Previous_Income"}],
+          "sort": [{"field": "Year"}]
+        },
+        {"filter": "datum.Previous_Income != null"},
+        {"calculate": "datum.Income - datum.Previous_Income", "as": "Diff"}
+      ],
+      "mark": {"type": "bar", "stroke": "black", "strokeWidth": 0.5},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal", "title": "Year", "axis": {"labelAngle": -90, "labelOverlap": true}},
+        "y": {"field": "Previous_Income", "type": "quantitative", "title": "Income (US$)", "scale": {"zero": false}},
+        "y2": {"field": "Income"},
+        "color": {
+          "condition": {"test": "datum.Diff > 0", "value": "#0072B2"},
+          "value": "#D55E00"
+        },
+        "tooltip": [
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {"field": "Income", "type": "quantitative", "title": "Total (US$)", "format": ",.0f"},
+          {"field": "Diff", "type": "quantitative", "title": "Net Change", "format": "+,.0f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [{"Year": "1998", "label": "Asian Financial Crisis"}]
+      },
+      "mark": {"type": "rule", "color": "#333", "strokeDash": [4, 4], "size": 1.5},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"Year": "1998", "y": 7000, "label": "Asian Financial Crisis"}]
+      },
+      "mark": {"type": "text", "align": "right", "dx": -5, "dy": 0, "fontSize": 11, "fontWeight": "bold", "color": "#333"},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}

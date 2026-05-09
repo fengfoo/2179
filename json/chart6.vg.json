@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Inequality of Wealth Distribution (2022)",
+  "layer": [
+    {
+      "data": {
+        "values": [{"x": 0, "y": 0}, {"x": 100, "y": 100}]
+      },
+      "mark": {"type": "line", "color": "#333", "strokeDash": [5, 5], "size": 2},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/hies_malaysia_percentile.csv" 
+      },
+      "transform": [
+        {"filter": "substring(datum.date, 0, 4) == '2022'"},
+        {
+          "joinaggregate": [{"op": "sum", "field": "income", "as": "Total_Income"}]
+        },
+        {
+          "window": [{"op": "sum", "field": "income", "as": "Cumulative_Income"}],
+          "sort": [{"field": "percentile", "order": "ascending"}]
+        },
+        {
+          "calculate": "(datum.Cumulative_Income / datum.Total_Income) * 100",
+          "as": "Cumulative_Wealth_Percent"
+        }
+      ],
+      "mark": {"type": "area", "line": {"color": "#D55E00", "size": 3}, "color": "#D55E00", "opacity": 0.2},
+      "encoding": {
+        "x": {
+          "field": "percentile", 
+          "type": "quantitative", 
+          "title": "Cumulative Population (%)",
+          "axis": {"grid": false}
+        },
+        "y": {
+          "field": "Cumulative_Wealth_Percent", 
+          "type": "quantitative", 
+          "title": "Cumulative Wealth (%)"
+        },
+        "tooltip": [
+          {"field": "percentile", "title": "Bottom X% of Population:"},
+          {"field": "Cumulative_Wealth_Percent", "title": "Owns X% of Wealth:", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [{"x": 50, "y": 55, "label": "Line of Perfect Equality"}]
+      },
+      "mark": {"type": "text", "align": "center", "angle": -40, "fontSize": 12, "color": "#333"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}

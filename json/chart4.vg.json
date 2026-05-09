@@ -1,0 +1,29 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "The Income Gap (Mean minus Median)",
+  "data": {
+    "url": "data/hh_income.csv"
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.income_mean) - toNumber(datum.income_median)",
+      "as": "Gap_Value"
+    },
+    {"filter": "datum.Gap_Value != null"}
+  ],
+  "mark": {"type": "area", "color": "#D55E00", "opacity": 0.5},
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Year"
+    },
+    "y": {
+      "field": "Gap_Value",
+      "type": "quantitative",
+      "title": "Income Gap (RM)"
+    }
+  }
+}
