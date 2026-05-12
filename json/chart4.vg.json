@@ -2,28 +2,74 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "title": "The Income Gap (Mean minus Median)",
+  "title": {"text": "The Expanding Income Gap (Ribbon Chart)", "anchor": "start"},
   "data": {
     "url": "data/hh_income.csv"
   },
-  "transform": [
+  "layer": [
     {
-      "calculate": "toNumber(datum.income_mean) - toNumber(datum.income_median)",
-      "as": "Gap_Value"
+      "mark": {"type": "area", "color": "#D55E00", "opacity": 0.2},
+      "encoding": {
+        "x": {
+          "field": "date", 
+          "type": "temporal",
+          "title": "Year",
+          "axis": {"grid": false}
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "income_mean"
+        },
+        "tooltip": [
+          {"field": "date", "timeUnit": "year", "title": "Year"},
+          {"field": "income_mean", "title": "Mean (MYR)", "format": ",.0f"},
+          {"field": "income_median", "title": "Median (MYR)", "format": ",.0f"}
+        ]
+      }
     },
-    {"filter": "datum.Gap_Value != null"}
-  ],
-  "mark": {"type": "area", "color": "#D55E00", "opacity": 0.5},
-  "encoding": {
-    "x": {
-      "field": "date",
-      "type": "temporal",
-      "title": "Year"
+    {
+      "mark": {"type": "line", "color": "#0072B2", "size": 2.5},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {
+          "field": "income_mean",
+          "type": "quantitative",
+          "title": "Income (Malaysian Ringgit)",
+          "axis": {"gridColor": "#f0f0f0", "gridDash": [4, 4]}
+        }
+      }
     },
-    "y": {
-      "field": "Gap_Value",
-      "type": "quantitative",
-      "title": "Income Gap (RM)"
+    {
+      "mark": {"type": "line", "color": "#D55E00", "size": 2.5, "strokeDash": [5, 5]},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "income_median", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"date": "2022-01-01", "income_mean": 8479, "label": "Mean Income"}]
+      },
+      "mark": {"type": "text", "align": "right", "dx": -10, "dy": -15, "color": "#0072B2", "fontWeight": "bold"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "income_mean", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"date": "2022-01-01", "income_median": 6338, "label": "Median Income"}]
+      },
+      "mark": {"type": "text", "align": "right", "dx": -10, "dy": 15, "color": "#D55E00", "fontWeight": "bold"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "income_median", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
     }
-  }
+  ]
 }
