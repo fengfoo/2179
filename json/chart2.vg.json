@@ -17,7 +17,7 @@
         "x": {
           "field": "income_median", 
           "type": "quantitative",
-          "title": "Median Income (RM)",
+          "title": "Median Income (Malaysian Ringgit)",
           "scale": {"zero": false}
         },
         "y": {
