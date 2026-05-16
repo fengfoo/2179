@@ -2,52 +2,126 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 400,
-  "title": "Absolute Poverty Rate by State in Malaysia",
-  "projection": {"type": "mercator"},
+  "title": {
+    "text": "State Absolute Poverty Map with Regional Context",
+    "anchor": "start"
+  },
+  "projection": {
+    "type": "mercator",
+    "scale": 2000,
+    "center": [109.5, 4.2]
+  },
   "params": [
     {
       "name": "Year_selection",
       "value": 2022,
       "bind": {
-        "input": "range",
-        "min": 1970,
-        "max": 2022,
-        "step": 1,
+        "input": "select",
+        "options": [1970, 1976, 1979, 1984, 1987, 1989, 1992, 1995, 1997, 1999, 2002, 2004, 2007, 2009, 2012, 2014, 2016, 2019, 2020, 2022],
         "name": "Select Year: "
+      }
+    },
+    {
+      "name": "ext_state",
+      "value": null
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/countries-50m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eaeaea",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/hh_poverty_state.csv"
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(substring(datum.date, 0, 4))",
+          "as": "Year_num"
+        },
+        {
+          "filter": "datum.Year_num == Year_selection"
+        },
+        {
+          "calculate": "replace(datum.state, 'W.P. ', '')",
+          "as": "Match_State"
+        },
+        {
+          "lookup": "Match_State",
+          "from": {
+            "data": {
+              "url": "data/geoBoundaries-MYS-ADM1.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "MYSADM1gbOpen"
+              }
+            },
+            "key": "properties.shapeName"
+          },
+          "as": "geo"
+        },
+        {
+          "filter": "datum.geo != null"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "poverty_absolute",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 20],
+            "range": ["#fbe9e7", "#d55e00"]
+          },
+          "legend": {
+            "title": "Absolute Poverty (%)"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "ext_state === null || datum.state === ext_state",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "Year_num", "type": "nominal", "title": "Year"},
+          {"field": "poverty_absolute", "type": "quantitative", "title": "Poverty Rate (%)", "format": ".1f"}
+        ]
       }
     }
   ],
-  "data": {
-    "url": "data/hh_poverty_state.csv"
-  },
-  "transform": [
-    {
-      "filter": "year(datum.date) == Year_selection"
+  "config": {
+    "view": {
+      "fill": "#bcd2ee",
+      "stroke": null
     },
-    {
-      "lookup": "state", 
-      "from": {
-        "data": {
-          "url": "data/malaysia-states.topojson",
-          "format": {"type": "topojson", "feature": "states"}
-        },
-        "key": "properties.Name" 
-      },
-      "as": "geo"
-    }
-  ],
-  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
-  "encoding": {
-    "shape": {"field": "geo", "type": "geojson"},
-    "color": {
-      "field": "poverty_absolute",
-      "type": "quantitative",
-      "scale": {"scheme": "oranges"},
-      "title": "Absolute Poverty (%)"
-    },
-    "tooltip": [
-      {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "poverty_absolute", "type": "quantitative", "title": "Poverty Rate (%)", "format": ".1f"}
-    ]
+    "title": { "font": "'Times New Roman', Times, serif" },
+    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "header": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "text": { "font": "Arial, Helvetica, sans-serif" }
   }
 }
