@@ -9,7 +9,6 @@
 =============================================================================
 -->
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,16 +24,16 @@
     
     <style>
         body { 
-            font-family: Georgia, 'Times New Roman', Times, serif; 
-            color: #333;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #2c3e50;
             background-color: #ffffff;
             margin: 0;
             padding: 0;
         }
         
         h1, h2, h3, h4, h5 {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #2c3e50;
+            font-family: Georgia, 'Times New Roman', Times, serif; 
+            color: #333;
             margin: 0;
             text-align: left !important;
         }
@@ -76,16 +75,17 @@
         }
 
         .chart-block-half {
-            width: 48%;
+            width: 100%; 
             display: flex;
             flex-direction: column;
+            margin-bottom: 50px; 
         }
 
         .chart-block-full {
             width: 100%;
             display: flex;
             flex-direction: column;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .vis-container {
@@ -103,6 +103,24 @@
         .chart-caption strong { 
             color: #222; 
             font-size: 1.05em; 
+        }
+
+        .map-hint {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f0f4f8;
+            border: 1px solid #c5d0db;
+            border-left: 4px solid #2c3e50;
+            border-radius: 4px;
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+
+        .map-hint span.hint-icon {
+            font-size: 1.2em;
         }
 
         .references-section { 
@@ -192,6 +210,9 @@
         <p class="section-desc">Economic success varies by location. The West Coast of Peninsular Malaysia generally records higher incomes and lower poverty rates compared to the East Coast and East Malaysia.</p>
         
         <div class="chart-block-full">
+            <div class="map-hint">
+                <span>Click any state on the map to highlight its data in the charts below. Click the same state again to reset.</span>
+            </div>
             <div id="map_chart" class="vis-container"></div>
             <p class="chart-caption"><strong>State Absolute Poverty Map:</strong> This geographic distribution shows that East Malaysian states, specifically Sabah, continue to face a higher poverty burden compared to Peninsular Malaysia.</p>
         </div>
@@ -208,9 +229,11 @@
 
         <div class="references-section">
             <h3 style="margin-top: 0;">Data References</h3>
+            <p class="apa-ref">Bostock, M. (n.d.). <em>world-atlas</em> [Data set]. jsDelivr. Retrieved May 16, 2026, from https://cdn.jsdelivr.net/npm/world-atlas@2/</p>
             <p class="apa-ref">Department of Statistics Malaysia. (n.d.). <em>Household income by state</em> [Data set]. OpenDOSM. Retrieved May 6, 2026, from https://open.dosm.gov.my/data-catalogue/hies_state?visual=table</p>
             <p class="apa-ref">Department of Statistics Malaysia. (n.d.). <em>Household income by percentile</em> [Data set]. OpenDOSM. Retrieved May 6, 2026, from https://open.dosm.gov.my/data-catalogue/hies_malaysia_percentile</p>
             <p class="apa-ref">Department of Statistics Malaysia. (n.d.). <em>Household poverty</em> [Data set]. OpenDOSM. Retrieved May 6, 2026, from https://open.dosm.gov.my/data-catalogue/hh_poverty</p>
+            <p class="apa-ref">geoBoundaries. (n.d.). <em>geoBoundaries global database of political administrative boundaries</em> [Data set]. Retrieved May 16, 2026, from https://www.geoboundaries.org/countryDownloads.html</p>
             <p class="apa-ref">Newbery, J. (n.d.). <em>malaysia-states.topojson</em> [Data set]. GitHub. Retrieved May 6, 2026, from https://github.com/jnewbery/CartogramMalaysia/blob/master/public/data/malaysia-states.topojson</p>
             <p class="apa-ref">World Bank Group. (n.d.). <em>Adjusted net national income per capita in US Dollars</em> [Data set]. World Bank Open Data. Retrieved May 6, 2026, from https://data.worldbank.org/indicator/NY.ADJ.NNTY.PC.CD</p>
         </div>
@@ -219,7 +242,7 @@
             Student Name: Foo Jian Feng <br>
             Student ID: 35172495 <br>
             Unit: FIT2179 Data Visualisation 2 <br>
-            Date of Completion: 11 May 2026 <br><br>
+            Last updated: 16 May 2026 <br><br>
             All work is my own, except where I have cited sources. Do not reuse, copy or recreate this file for any reasons whatsoever. All rights reserved.
         </div>
 
