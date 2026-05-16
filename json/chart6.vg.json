@@ -16,7 +16,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/hies_malaysia_percentile.csv" 
+        "url": "data/hies_malaysia_percentile.csv" 
       },
       "transform": [
         {"filter": "substring(datum.date, 0, 4) == '2022'"},
@@ -53,14 +53,29 @@
     },
     {
       "data": {
-        "values": [{"x": 50, "y": 55, "label": "Line of Perfect Equality"}]
+        "values": [{"x": 50, "y": 50, "label": "Line of Perfect Equality"}]
       },
-      "mark": {"type": "text", "align": "center", "angle": -40, "fontSize": 12, "color": "#333"},
+      "mark": {
+        "type": "text", 
+        "align": "center",
+        "baseline": "bottom",
+        "angle": -20, 
+        "dy": -5, 
+        "fontSize": 12, 
+        "color": "#333"
+      },
       "encoding": {
         "x": {"field": "x", "type": "quantitative"},
         "y": {"field": "y", "type": "quantitative"},
         "text": {"field": "label"}
       }
     }
-  ]
+  ],
+  "config": {
+    "title": { "font": "'Times New Roman', Times, serif" },
+    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "header": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "text": { "font": "Arial, Helvetica, sans-serif" }
+  }
 }
