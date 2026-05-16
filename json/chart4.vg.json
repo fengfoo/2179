@@ -16,13 +16,8 @@
           "title": "Year",
           "axis": {"grid": false}
         },
-        "y": {
-          "field": "income_median",
-          "type": "quantitative"
-        },
-        "y2": {
-          "field": "income_mean"
-        },
+        "y": {"field": "income_median", "type": "quantitative"},
+        "y2": {"field": "income_mean"},
         "tooltip": [
           {"field": "date", "timeUnit": "year", "title": "Year"},
           {"field": "income_mean", "title": "Mean (MYR)", "format": ",.0f"},
@@ -51,23 +46,27 @@
     },
     {
       "data": {
-        "values": [{"date": "2022-01-01", "income_mean": 8479, "label": "Mean Income"}]
+        "values": [
+          {"date": "1971-01-01"},
+          {"date": "1998-01-01"},
+          {"date": "2020-01-01"}
+        ]
       },
-      "mark": {"type": "text", "align": "right", "dx": -10, "dy": -15, "color": "#0072B2", "fontWeight": "bold"},
-      "encoding": {
-        "x": {"field": "date", "type": "temporal"},
-        "y": {"field": "income_mean", "type": "quantitative"},
-        "text": {"field": "label"}
-      }
+      "mark": {"type": "rule", "color": "#888", "strokeDash": [3, 3]},
+      "encoding": {"x": {"field": "date", "type": "temporal"}}
     },
     {
       "data": {
-        "values": [{"date": "2022-01-01", "income_median": 6338, "label": "Median Income"}]
+        "values": [
+          {"date": "1971-01-01", "y": 6500, "label": "1971: New Economic Policy Launched"},
+          {"date": "1998-01-01", "y": 7500, "label": "1998: Asian Financial Crisis"},
+          {"date": "2020-01-01", "y": 8500, "label": "2020: COVID-19 Pandemic"}
+        ]
       },
-      "mark": {"type": "text", "align": "right", "dx": -10, "dy": 15, "color": "#D55E00", "fontWeight": "bold"},
+      "mark": {"type": "text", "align": "left", "dx": 5, "fontWeight": "bold", "fontSize": 11, "color": "#555"},
       "encoding": {
         "x": {"field": "date", "type": "temporal"},
-        "y": {"field": "income_median", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
         "text": {"field": "label"}
       }
     }
