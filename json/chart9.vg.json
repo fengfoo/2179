@@ -59,7 +59,11 @@
     },
     {
       "data": {
-        "values": [{"Year_Parsed": "2020-01-01"}]
+        "values": [
+          {"Year_Parsed": "1971-01-01"},
+          {"Year_Parsed": "1998-01-01"},
+          {"Year_Parsed": "2020-01-01"}
+        ]
       },
       "mark": {"type": "rule", "color": "#D55E00", "strokeDash": [4, 4], "size": 1.5},
       "encoding": {
@@ -68,9 +72,13 @@
     },
     {
       "data": {
-        "values": [{"Year_Parsed": "2020-01-01", "label": "2020 COVID-19 Shock"}]
+        "values": [
+          {"Year_Parsed": "1971-01-01", "label": "1971: New Economic Policy Launched"},
+          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis"},
+          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19 Pandemic"}
+        ]
       },
-      "mark": {"type": "text", "align": "right", "dx": -5, "dy": -120, "fontSize": 11, "fontWeight": "bold", "color": "#D55E00"},
+      "mark": {"type": "text", "align": "left", "dx": 5, "dy": -120, "fontSize": 11, "fontWeight": "bold", "color": "#D55E00"},
       "encoding": {
         "x": {"field": "Year_Parsed", "type": "temporal"},
         "text": {"field": "label"}
