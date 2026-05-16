@@ -70,12 +70,6 @@
         "text": {"field": "label"}
       }
     }
-  ],
-  "config": {
-    "title": { "font": "'Times New Roman', Times, serif" },
-    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
-    "header": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
-    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
-    "text": { "font": "Arial, Helvetica, sans-serif" }
-  }
+  ]
+  
 }
