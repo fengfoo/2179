@@ -3,6 +3,12 @@
   "width": "container",
   "height": 300,
   "title": "Shrinking Volume of Poverty (1970 - 2022)",
+  "params": [
+    {
+      "name": "ext_state",
+      "value": null
+    }
+  ],
   "layer": [
     {
       "data": {
@@ -38,6 +44,13 @@
           },
           "title": "State"
         },
+        "opacity": {
+          "condition": {
+            "test": "ext_state === null || datum.state === ext_state",
+            "value": 1
+          },
+          "value": 0.08
+        },
         "tooltip": [
           {"field": "Year_Parsed", "timeUnit": "year", "title": "Year"},
           {"field": "state", "title": "State"},
@@ -48,9 +61,9 @@
     {
       "data": {
         "values": [
-          {"Year_Parsed": "1971-01-01", "label": "1971: NEP Launched", "dy": -130, "dx": 5, "align": "left"},
-          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis", "dy": -130, "dx": -5, "align": "right"},
-          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19 Shock", "dy": -110, "dx": -5, "align": "right"}
+          {"Year_Parsed": "1971-01-01"},
+          {"Year_Parsed": "1998-01-01"},
+          {"Year_Parsed": "2020-01-01"}
         ]
       },
       "mark": {"type": "rule", "color": "#333", "strokeDash": [4, 4], "size": 1.5},
@@ -61,9 +74,9 @@
     {
       "data": {
         "values": [
-          {"Year_Parsed": "1971-01-01", "label": "1971: NEP Launched", "dy": -130, "dx": 5, "align": "left"},
-          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis", "dy": -130, "dx": -5, "align": "right"},
-          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19", "dy": 120, "dx": -5, "align": "right"}
+          {"Year_Parsed": "1971-01-01", "label": "1971: New Economic Policy Launched", "dy": -145, "dx": 5, "align": "left"},
+          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis", "dy": -120, "dx": -5, "align": "right"},
+          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19 Pandemic", "dy": 120, "dx": -5, "align": "right"}
         ]
       },
       "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "color": "#333"},
@@ -72,8 +85,15 @@
         "y": {"value": 10},
         "text": {"field": "label"},
         "align": {"field": "align", "type": "nominal"},
-        "dx": {"field": "dx", "type": "quantitative"}
+        "dx": {"field": "dx", "type": "quantitative"},
+        "dy": {"field": "dy", "type": "quantitative"}
       }
     }
-  ]
+  ],
+  "config": {
+    "title": { "font": "Arial, Helvetica, sans-serif" },
+    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "text": { "font": "Arial, Helvetica, sans-serif" }
+  }
 }
