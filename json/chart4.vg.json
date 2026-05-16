@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "title": {"text": "The Expanding Income Gap", "anchor": "start"},
+  "title": {"text": "The Expanding Income Gap"},
   "data": {
     "url": "data/hh_income.csv"
   },
