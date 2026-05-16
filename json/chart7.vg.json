@@ -104,44 +104,4 @@
       }
     }
   ]
-}      },
-      "mark": {"type": "rule", "color": "#CC79A7", "size": 1.5, "strokeDash": [2, 2]},
-      "encoding": {
-        "x": {"field": "Year_String", "type": "ordinal"},
-        "y": {"field": "start_point", "type": "quantitative"},
-        "y2": {"field": "end_point"}
-      }
-    },
-    {
-      "data": {
-        "values": [{"Year_String": "1989", "end_point": 34, "label": "Terengganu's massive 25% reduction"}]
-      },
-      "mark": {"type": "text", "align": "left", "dx": 5, "dy": 0, "fontSize": 11, "fontWeight": "bold", "color": "#CC79A7"},
-      "encoding": {
-        "x": {"field": "Year_String", "type": "ordinal"},
-        "y": {"field": "end_point", "type": "quantitative"},
-        "text": {"field": "label"}
-      }
-    },
-    {
-      "data": {
-        "values": [{"threshold": 10}]
-      },
-      "mark": {"type": "rule", "color": "#D55E00", "strokeDash": [4, 4], "size": 2},
-      "encoding": {
-        "y": {"field": "threshold", "type": "quantitative"}
-      }
-    },
-    {
-      "data": {
-        "values": [{"Year_String": "1989", "threshold": 10, "label": "10% Poverty Threshold"}]
-      },
-      "mark": {"type": "text", "align": "left", "dx": 5, "dy": -8, "fontSize": 11, "fontWeight": "bold", "color": "#D55E00"},
-      "encoding": {
-        "x": {"field": "Year_String", "type": "ordinal"},
-        "y": {"field": "threshold", "type": "quantitative"},
-        "text": {"field": "label"}
-      }
-    }
-  ]
 }
