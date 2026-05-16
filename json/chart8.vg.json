@@ -34,7 +34,11 @@
     },
     {
       "data": {
-        "values": [{"Year": "1998", "label": "Asian Financial Crisis"}]
+        "values": [
+          {"Year": "1971"},
+          {"Year": "1998"},
+          {"Year": "2020"}
+        ]
       },
       "mark": {"type": "rule", "color": "#333", "strokeDash": [4, 4], "size": 1.5},
       "encoding": {
@@ -43,9 +47,13 @@
     },
     {
       "data": {
-        "values": [{"Year": "1998", "y": 7000, "label": "Asian Financial Crisis"}]
+        "values": [
+          {"Year": "1971", "y": 5000, "label": "1971: New Economic Policy Launched"},
+          {"Year": "1998", "y": 7000, "label": "1998: Asian Financial Crisis"},
+          {"Year": "2020", "y": 9000, "label": "2020: COVID-19 Pandemic"}
+        ]
       },
-      "mark": {"type": "text", "align": "right", "dx": -5, "dy": 0, "fontSize": 11, "fontWeight": "bold", "color": "#333"},
+      "mark": {"type": "text", "align": "left", "dx": 5, "dy": 0, "fontSize": 11, "fontWeight": "bold", "color": "#333"},
       "encoding": {
         "x": {"field": "Year", "type": "ordinal"},
         "y": {"field": "y", "type": "quantitative"},
