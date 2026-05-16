@@ -1,3 +1,14 @@
+<!--
+=============================================================================
+Student Name: Foo Jian Feng
+Student ID: 35172495
+Assignment: FIT2179 - Data Visualisation 2
+Description: This code is for the assignment of FIT2179. This code is
+NOT meant to be reused or copied in any way outside of grading purposes only.
+Date: May 2026
+=============================================================================
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +23,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
     
     <style>
-        /* Base Typography */
-        body, p, .section-desc, .chart-caption, .apa-ref, .footer-info { 
+
+        body, p, .section-desc, .apa-ref, .footer-info { 
             font-family: Arial, Helvetica, sans-serif;
             color: #333;
             background-color: #ffffff;
@@ -21,7 +32,7 @@
             padding: 0;
         }
         
-        h2, h3, h4, h5, .section-header, .chart-caption strong {
+        h2, h3, h4, h5, .section-header {
             font-family: 'Times New Roman', Times, serif; 
             color: #2c3e50;
             margin: 0;
@@ -56,7 +67,7 @@
         .section-desc { 
             color: #555; 
             margin-top: 0;
-            margin-bottom: 40px;
+            margin-bottom: 40px; 
             font-size: 1.1em; 
             line-height: 1.6; 
         }
@@ -84,6 +95,11 @@
 
         .vis-container { width: 100%; }
 
+        .chart-caption, .chart-caption strong { 
+            font-family: Arial, Helvetica, sans-serif !important; 
+            text-align: left !important;
+        }
+
         .chart-caption { 
             font-size: 0.95em; 
             color: #444; 
@@ -91,7 +107,31 @@
             line-height: 1.5; 
         }
         
-        .chart-caption strong { font-size: 1.05em; }
+        .chart-caption strong { 
+            color: #222;
+            font-size: 1.05em; 
+        }
+
+        .map-hint {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #f0f4f8;
+            border: 1px solid #c5d0db;
+            border-left: 4px solid #2c3e50;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-family: Arial, Helvetica, sans-serif; 
+            font-size: 0.95em;
+            color: #2c3e50;
+            text-align: left;
+        }
+
+        .hint-icon {
+            font-size: 1.2em;
+            line-height: 1;
+        }
 
         /* Footer & References */
         .references-section { 
@@ -181,6 +221,7 @@
         
         <div class="chart-block-full">
             <div class="map-hint">
+                <span class="hint-icon">ℹ️</span>
                 <span>Click any state on the map to highlight its data in the charts below. Click the same state again to reset.</span>
             </div>
             <div id="map_chart" class="vis-container"></div>
