@@ -3,7 +3,7 @@
   "width": "container",
   "height": 400,
   "title": {
-    "text": "State Absolute Poverty Map with Regional Context"
+    "text": "State Absolute Poverty Map by States"
   },
   "projection": {
     "type": "mercator",
@@ -118,65 +118,5 @@
       "stroke": null
     }
 
-  }
-}                "type": "topojson",
-                "feature": "MYSADM1gbOpen"
-              }
-            },
-            "key": "properties.shapeName"
-          },
-          "as": "geo"
-        },
-        {
-          "filter": "datum.geo != null"
-        }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#ffffff",
-        "strokeWidth": 0.5,
-        "cursor": "pointer"
-      },
-      "encoding": {
-        "shape": {
-          "field": "geo",
-          "type": "geojson"
-        },
-        "color": {
-          "field": "poverty_absolute",
-          "type": "quantitative",
-          "scale": {
-            "domain": [0, 20],
-            "range": ["#fbe9e7", "#d55e00"]
-          },
-          "legend": {
-            "title": "Absolute Poverty (%)"
-          }
-        },
-        "opacity": {
-          "condition": {
-            "test": "ext_state === null || datum.state === ext_state",
-            "value": 1
-          },
-          "value": 0.2
-        },
-        "tooltip": [
-          {"field": "state", "type": "nominal", "title": "State"},
-          {"field": "Year_num", "type": "nominal", "title": "Year"},
-          {"field": "poverty_absolute", "type": "quantitative", "title": "Poverty Rate (%)", "format": ".1f"}
-        ]
-      }
-    }
-  ],
-  "config": {
-    "view": {
-      "fill": "#bcd2ee",
-      "stroke": null
-    },
-    "title": { "font": "'Times New Roman', Times, serif" },
-    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
-    "header": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
-    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
-    "text": { "font": "Arial, Helvetica, sans-serif" }
   }
 }
