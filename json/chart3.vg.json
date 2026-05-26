@@ -23,18 +23,16 @@
       "as": "Deviation"
     }
   ],
-  "encoding": {
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "sort": {"field": "Deviation", "order": "descending"}
-    }
-  },
   "layer": [
     {
       "mark": {"type": "rule", "size": 2},
       "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "Deviation", "order": "descending"}
+        },
         "x": {"field": "Deviation", "type": "quantitative", "title": "Percentage Points from Average"},
         "x2": {"datum": 0},
         "color": {
@@ -53,6 +51,12 @@
     {
       "mark": {"type": "point", "filled": true, "size": 100},
       "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "Deviation", "order": "descending"}
+        },
         "x": {"field": "Deviation", "type": "quantitative"},
         "color": {
           "condition": {"test": "datum.Deviation > 0", "value": "#D55E00"},
@@ -73,16 +77,16 @@
       }
     },
     {
-      "data": {"values": [{"Deviation": -0.5, "label": "<-- Outperforming National Average"}]},
-      "mark": {"type": "text", "align": "right", "dy": -12, "color": "#0072B2", "fontWeight": "bold", "fontSize": 11},
+      "data": {"values": [{"Deviation": -0.5, "label": "<-- Outperforming Average"}]},
+      "mark": {"type": "text", "align": "right", "dy": -21, "color": "#0072B2", "fontWeight": "bold", "fontSize": 11},
       "encoding": {
         "x": {"field": "Deviation", "type": "quantitative"},
         "text": {"field": "label"}
       }
     },
     {
-      "data": {"values": [{"Deviation": 0.5, "label": "Falling Behind National Average -->"}]},
-      "mark": {"type": "text", "align": "left", "dy": -12, "color": "#D55E00", "fontWeight": "bold", "fontSize": 11},
+      "data": {"values": [{"Deviation": 0.5, "label": "Falling Behind Average -->"}]},
+      "mark": {"type": "text", "align": "left", "dy": -21, "color": "#D55E00", "fontWeight": "bold", "fontSize": 11},
       "encoding": {
         "x": {"field": "Deviation", "type": "quantitative"},
         "text": {"field": "label"}
