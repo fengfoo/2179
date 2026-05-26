@@ -44,7 +44,8 @@
           "field": "Poverty Type",
           "type": "nominal",
           "scale": {"range": ["#D55E00", "#0072B2"]},
-          "title": "Metric"
+          "title": "Metric",
+          "legend": {"orient": "bottom"}
         },
         "tooltip": [
           {"field": "state", "type": "nominal", "title": "State"},
