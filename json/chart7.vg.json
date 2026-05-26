@@ -44,7 +44,9 @@
               "#9C755F", "#BAB0AC", "#4B0082", "#000080"
             ]
           },
-          "title": "State"
+          "title": "State",
+          "legend": {"orient": "bottom",
+          "columns": 5}
         },
         "tooltip": [
           {"field": "state", "type": "nominal", "title": "State"},
