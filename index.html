@@ -5,7 +5,7 @@ Student ID: 35172495
 Assignment: FIT2179 - Data Visualisation 2
 Description: This code is for the assignment of FIT2179. This code is
 NOT meant to be reused or copied in any way outside of grading purposes only.
-Date: May 2026
+Date: 27 May 2026
 =============================================================================
 -->
 
@@ -23,7 +23,6 @@ Date: May 2026
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
     
     <style>
-
         body, p, .section-desc, .apa-ref, .footer-info { 
             font-family: Arial, Helvetica, sans-serif;
             color: #333;
@@ -72,42 +71,34 @@ Date: May 2026
             line-height: 1.6; 
         }
 
-        .chart-row {
+        .chart-layout {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: row;
             justify-content: space-between;
-            margin-bottom: 0; 
-        }
-
-        .chart-block-half {
+            align-items: stretch;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 70px; 
-        }
-
-        .chart-block-full {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
             margin-bottom: 70px;
+            box-sizing: border-box;
         }
 
-        .vis-container { width: 100%; }
-
-        .chart-caption, .chart-caption strong { 
-            font-family: Arial, Helvetica, sans-serif !important; 
-            text-align: left !important;
+        .vis-container {
+            width: 68%; 
+            min-width: 0; 
         }
 
         .chart-caption { 
+            width: 28%;
+            font-family: Arial, Helvetica, sans-serif !important; 
             font-size: 0.95em; 
             color: #444; 
-            margin-top: 15px; 
+            margin-top: 0; 
             line-height: 1.5; 
+            text-align: left !important;
         }
         
         .chart-caption strong { 
+            font-family: Arial, Helvetica, sans-serif !important; 
+            display: inline;
             color: #222;
             font-size: 1.05em; 
         }
@@ -126,6 +117,8 @@ Date: May 2026
             font-size: 0.95em;
             color: #2c3e50;
             text-align: left;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .hint-icon {
@@ -133,7 +126,6 @@ Date: May 2026
             line-height: 1;
         }
 
-        /* Footer & References */
         .references-section { 
             margin-top: 80px; 
             padding: 30px; 
@@ -158,7 +150,6 @@ Date: May 2026
             line-height: 1.8;
         }
     </style>
-
 </head>
 <body>
     <div class="page-container">
@@ -169,49 +160,43 @@ Date: May 2026
         <h2 class="section-header">1. Macroeconomic Situation</h2>
         <p class="section-desc">National income growth and localized poverty rates highlight the impact of major financial crises on the Malaysian economy.</p>
         
-        <div class="chart-row">
-            <div class="chart-block-half">
-                <div id="chart8" class="vis-container"></div>
-                <p class="chart-caption"><strong>Year-over-Year Waterfall:</strong> This chart visualizes the accumulation of national income per capita. Orange drops identify significant financial contractions during the 1998 Asian Financial Crisis and the 2020 pandemic.</p>
-            </div>
-            
-            <div class="chart-block-half">
-                <div id="chart9" class="vis-container"></div>
-                <p class="chart-caption"><strong>National Wealth vs State Absolute Poverty:</strong> National income per capita generally increases as absolute poverty rates decline. The 2020 COVID-19 shock disrupted this trend, causing a simultaneous drop in income and a spike in poverty.</p>
-            </div>
+        <div class="chart-layout">
+            <div id="chart8" class="vis-container"></div>
+            <p class="chart-caption"><strong>Year-over-Year Waterfall:</strong> This chart visualizes the accumulation of national income per capita. <strong>Orange drops identify significant financial contractions </strong> during the 1998 Asian Financial Crisis and the 2020 pandemic.</p>
+        </div>
+        
+        <div class="chart-layout">
+            <div id="chart9" class="vis-container"></div>
+            <p class="chart-caption"><strong>National Wealth vs State Absolute Poverty:</strong> The 2020 COVID-19 shock disrupted long-term trends, causing a simultaneous drop in income and a spike in poverty, which gives a <strong> loop back </strong> pattern that is not seen in other years.</p>
         </div>
 
         <h2 class="section-header">2. Household Income and the Wealth Gap</h2>
         <p class="section-desc">Despite national growth, wealth concentration and income stratification levels reveal persistent structural inequality.</p>
         
-        <div class="chart-row">
-            <div class="chart-block-half">
-                <div id="chart2" class="vis-container"></div>
-                <p class="chart-caption"><strong>Connected Scatterplot (Mean vs Median):</strong> This plot shows mean income growing at a faster rate than the median, pulling wealth toward higher-income brackets. The top right loop tracks the impact and subsequent recovery from the 2020 pandemic.</p>
-            </div>
-            
-            <div class="chart-block-half">
-                <div id="chart4" class="vis-container"></div>
-                <p class="chart-caption"><strong>Ranged Ribbon Chart (Mean vs Median):</strong> This chart layers both the mean and median income trajectories, shading the physical space between them. The widening gap in the orange area proves that income inequality is accelerating, as the national average pulls further away from the typical household median.</p>
-            </div>
+        <div class="chart-layout">
+            <div id="chart2" class="vis-container"></div>
+            <p class="chart-caption"><strong>Connected Scatterplot (Mean vs Median):</strong> This plot shows mean income growing at a faster rate than the median, pulling <strong>wealth toward higher-income bracket. </strong> The top right loop tracks the impact and subsequent recovery from the 2020 pandemic.</p>
         </div>
         
-        <div class="chart-row">
-            <div class="chart-block-half">
-                <div id="chart6" class="vis-container"></div>
-                <p class="chart-caption"><strong>Lorenz Curve of Income Distribution:</strong> The significant curve below the line of equality confirms high wealth concentration. The bottom 80 percent of the population shares only half of the total national income.</p>
-            </div>
-            
-            <div class="chart-block-half">
-                <div id="chart7" class="vis-container"></div>
-                <p class="chart-caption"><strong>Long-term Poverty Slopegraph:</strong> Most states achieved successful poverty reduction between 1989 and 2022. Terengganu recorded the most significant decline, with absolute poverty rates falling from 31 percent to below 10 percent.</p>
-            </div>
+        <div class="chart-layout">
+            <div id="chart4" class="vis-container"></div>
+            <p class="chart-caption"><strong>Ranged Ribbon Chart (Mean vs Median):</strong> This chart layers both the mean and median income trajectories, shading the physical space between them. The widening gap in the orange area proves that income inequality is accelerating, as the national average pulls further away from the typical household median.</p>
+        </div>
+        
+        <div class="chart-layout">
+            <div id="chart6" class="vis-container"></div>
+            <p class="chart-caption"><strong>Lorenz Curve of Income Distribution:</strong> The significant curve below the line of equality confirms high wealth concentration. The <strong>bottom 80 percent</strong> of the population shares only <strong>half</strong> of the total national income.</p>
+        </div>
+        
+        <div class="chart-layout">
+            <div id="chart7" class="vis-container"></div>
+            <p class="chart-caption"><strong>Long-term Poverty Slopegraph:</strong> Most states achieved <strong>successful poverty reduction</strong> between 1989 and 2022. <strong>Terengganu</strong> recorded the most significant decline, with absolute poverty rates falling from 31 percent to below 10 percent.</p>
         </div>
 
         <h2 class="section-header">3. Tracking Poverty</h2>
         <p class="section-desc">Some important definitions: <strong>Absolute poverty</strong> measures those lacking basic survival needs, while <strong>relative poverty</strong> measures those falling behind the national median. The gap between these metrics highlights different economic realities.</p>
 
-        <div class="chart-block-full">
+        <div class="chart-layout">
             <div id="chart10" class="vis-container"></div>
             <p class="chart-caption"><strong>This Dumbbell Plot</strong> highlights the gap between absolute and relative poverty. This shows that wealthier states can still exhibit high relative poverty, as seen in Selangor and other cities, despite low absolute poverty.</p>
         </div>
@@ -219,23 +204,23 @@ Date: May 2026
         <h2 class="section-header">4. Differences seen in States in Malaysia</h2>
         <p class="section-desc">Economic success varies by location. The West Coast of Peninsular Malaysia generally records higher incomes and lower poverty rates compared to the East Coast and East Malaysia.</p>
         
-        <div class="chart-block-full">
-            <div class="map-hint">
-                <span class="hint-icon">ℹ️</span>
-                <span>Click any state on the map to highlight its data in the charts below. Click the same state again to reset.</span>
-            </div>
+        <div class="map-hint">
+            <span class="hint-icon">ℹ️</span>
+            <span>Click any state on the map to highlight its data in the charts below. Click the same state again to reset.</span>
+        </div>
+        <div class="chart-layout">
             <div id="map_chart" class="vis-container"></div>
             <p class="chart-caption"><strong>State Absolute Poverty Map:</strong> This geographic distribution shows that East Malaysian states, specifically Sabah, continue to face a higher poverty burden compared to Peninsular Malaysia.</p>
         </div>
         
-        <div class="chart-block-full">
+        <div class="chart-layout">
             <div id="chart3" class="vis-container"></div>
-            <p class="chart-caption"><strong>State Variance from National Average:</strong> This comparison identifies Sabah as the primary outlier lagging behind national averages, while Putrajaya and Selangor lead the nation in prosperity metrics.</p>
+            <p class="chart-caption"><strong>State Variance from National Average:</strong> This comparison identifies Sabah as the </strong>primary outlier lagging behind national averages</strong>, while Putrajaya and Selangor lead the nation in prosperity metrics.</p>
         </div>
 
-        <div class="chart-block-full">
+        <div class="chart-layout">
             <div id="chart5" class="vis-container"></div>
-            <p class="chart-caption"><strong>Longitudinal Poverty Volume (Streamgraph):</strong> Total absolute poverty volume has shrunk over five decades. Major economic shocks in 1998 and 2020 caused temporary structural increases in the poverty burden across all states.</p>
+            <p class="chart-caption"><strong>Longitudinal Poverty Volume (Streamgraph):</strong> Total absolute poverty volume has shrunk over five decades. <strong>Major economic shocks in 1998 and 2020 </strong>caused temporary structural increases in the poverty burden across all states.</p>
         </div>
 
         <div class="references-section">
@@ -253,7 +238,7 @@ Date: May 2026
             Student Name: Foo Jian Feng <br>
             Student ID: 35172495 <br>
             Unit: FIT2179 Data Visualisation 2 <br>
-            Last updated: 16 May 2026 <br><br>
+            Last updated: 27 May 2026 <br><br>
             All work is my own, except where I have cited sources. Do not reuse, copy or recreate this file for any reasons whatsoever. All rights reserved.
         </div>
 
