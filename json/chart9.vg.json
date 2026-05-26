@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "National Wealth vs State Absolute Poverty",
+  "title": {
+    "text": "National Wealth vs State Absolute Poverty",
+    "offset": 30
+  },
   "width": "container",
-  "height": 300,
-  "resolve": {"scale": {"y": "independent"}},
   "params": [
     {
       "name": "State_selection",
@@ -15,28 +16,21 @@
       }
     }
   ],
-  "layer": [
+  "vconcat": [
     {
+      "width": "container",
+      "height": 130,
       "data": {"url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/worldbank_my_long.csv"},
-      "mark": {"type": "area", "color": "#56B4E9", "opacity": 0.3},
+      "mark": {"type": "line", "color": "#0072B2", "strokeWidth": 2, "point": true},
       "encoding": {
-        "x": {"field": "Year", "type": "temporal", "title": "Year", "axis": {"grid": false}},
-        "y": {"field": "Income", "type": "quantitative", "title": "National Income (US$)"}
+        "x": {"field": "Year", "type": "temporal", "title": null, "axis": {"labels": false, "ticks": false}},
+        "y": {"field": "Income", "type": "quantitative", "title": "Income (US$)", "scale": {"zero": false}},
+        "tooltip": [{"field": "Year", "timeUnit": "year", "title": "Year"}, {"field": "Income", "title": "Income (US$)"}]
       }
     },
     {
-      "data": {"url": "data/worldbank_my_long.csv"},
-      "mark": {"type": "line", "color": "#0072B2", "strokeWidth": 2},
-      "encoding": {
-        "x": {"field": "Year", "type": "temporal"},
-        "y": {
-          "field": "Income", 
-          "type": "quantitative",
-          "axis": null 
-        }
-      }
-    },
-    {
+      "width": "container",
+      "height": 130,
       "data": {"url": "https://raw.githubusercontent.com/fengfoo/2179/refs/heads/main/data/hh_poverty_state.csv"},
       "transform": [
         {"filter": "datum.state == State_selection"},
@@ -44,45 +38,16 @@
       ],
       "mark": {"type": "line", "color": "#D55E00", "strokeWidth": 3, "point": true},
       "encoding": {
-        "x": {"field": "Year_Parsed", "type": "temporal"},
-        "y": {
-          "field": "poverty_absolute", 
-          "type": "quantitative", 
-          "title": "Absolute Poverty (%)"
-        },
-        "tooltip": [
-          {"field": "state", "title": "State"},
-          {"field": "Year_Parsed", "timeUnit": "year", "title": "Year"},
-          {"field": "poverty_absolute", "title": "Absolute Poverty (%)"}
-        ]
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {"Year_Parsed": "1971-01-01"},
-          {"Year_Parsed": "1998-01-01"},
-          {"Year_Parsed": "2020-01-01"}
-        ]
-      },
-      "mark": {"type": "rule", "color": "#D55E00", "strokeDash": [4, 4], "size": 1.5},
-      "encoding": {
-        "x": {"field": "Year_Parsed", "type": "temporal"}
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {"Year_Parsed": "1971-01-01", "label": "1971: New Economic Policy Launched"},
-          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis"},
-          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19 Pandemic"}
-        ]
-      },
-      "mark": {"type": "text", "align": "left", "dx": 5, "dy": -120, "fontSize": 11, "fontWeight": "bold", "color": "#D55E00"},
-      "encoding": {
-        "x": {"field": "Year_Parsed", "type": "temporal"},
-        "text": {"field": "label"}
+        "x": {"field": "Year_Parsed", "type": "temporal", "title": "Year", "axis": {"grid": false}},
+        "y": {"field": "poverty_absolute", "type": "quantitative", "title": "Poverty (%)"},
+        "tooltip": [{"field": "state", "title": "State"}, {"field": "Year_Parsed", "timeUnit": "year", "title": "Year"}, {"field": "poverty_absolute", "title": "Poverty (%)"}]
       }
     }
-  ]
+  ],
+  "config": {
+    "title": { "font": "Arial, Helvetica, sans-serif" },
+    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "text": { "font": "Arial, Helvetica, sans-serif" }
+  }
 }
