@@ -42,7 +42,9 @@
           "scale": {
             "range": ["#0072B2", "#56B4E9", "#D55E00", "#E69F00", "#F0E442", "#CC79A7", "#999999", "#1A1A1A", "#4E79A7", "#F28E2B", "#B07AA1", "#FF9DA7", "#9C755F", "#BAB0AC", "#4B0082", "#000080"]
           },
-          "title": "State"
+          "title": "State",
+          "legend": {"orient": "bottom",
+          "columns": 5}
         },
         "opacity": {
           "condition": {
@@ -72,26 +74,35 @@
       }
     },
     {
-      "data": {
-        "values": [
-          {"Year_Parsed": "1971-01-01", "label": "1971: New Economic Policy Launched", "dy": -145, "dx": 5, "align": "left"},
-          {"Year_Parsed": "1998-01-01", "label": "1998: Asian Financial Crisis", "dy": -120, "dx": -5, "align": "right"},
-          {"Year_Parsed": "2020-01-01", "label": "2020: COVID-19 Pandemic", "dy": 120, "dx": -5, "align": "right"}
-        ]
-      },
-      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "color": "#333"},
+      "data": {"values": [{"Year_Parsed": "1971-01-01"}]},
+      "mark": {"type": "text", "align": "left", "dx": 5, "fontWeight": "bold", "fontSize": 11, "color": "#333"},
       "encoding": {
         "x": {"field": "Year_Parsed", "type": "temporal"},
-        "y": {"value": 10},
-        "text": {"field": "label"},
-        "align": {"field": "align", "type": "nominal"},
-        "dx": {"field": "dx", "type": "quantitative"},
-        "dy": {"field": "dy", "type": "quantitative"}
+        "y": {"value": -25},
+        "text": {"value": "1971: New Economic Policy Launched"}
+      }
+    },
+    {
+      "data": {"values": [{"Year_Parsed": "1998-01-01"}]},
+      "mark": {"type": "text", "align": "left", "dx": 5, "fontWeight": "bold", "fontSize": 11, "color": "#333"},
+      "encoding": {
+        "x": {"field": "Year_Parsed", "type": "temporal"},
+        "y": {"value": -10},
+        "text": {"value": "1998: Asian Financial Crisis"}
+      }
+    },
+    {
+      "data": {"values": [{"Year_Parsed": "2020-01-01"}]},
+      "mark": {"type": "text", "align": "right", "dx": -5, "fontWeight": "bold", "fontSize": 11, "color": "#333"},
+      "encoding": {
+        "x": {"field": "Year_Parsed", "type": "temporal"},
+        "y": {"value": -25},
+        "text": {"value": "2020: COVID-19 Pandemic"}
       }
     }
   ],
   "config": {
-    "title": { "font": "Arial, Helvetica, sans-serif" },
+    "title": { "font": "Arial, Helvetica, sans-serif", "offset": 30 },
     "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
     "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
     "text": { "font": "Arial, Helvetica, sans-serif" }
