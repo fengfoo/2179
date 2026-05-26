@@ -56,19 +56,37 @@
       "encoding": {"x": {"field": "date", "type": "temporal"}}
     },
     {
-      "data": {
-        "values": [
-          {"date": "1971-01-01", "y": 6500, "label": "1971: New Economic Policy Launched"},
-          {"date": "1998-01-01", "y": 7500, "label": "1998: Asian Financial Crisis"},
-          {"date": "2020-01-01", "y": 8500, "label": "2020: COVID-19 Pandemic"}
-        ]
-      },
+      "data": {"values": [{"date": "1971-01-01"}]},
       "mark": {"type": "text", "align": "left", "dx": 5, "fontWeight": "bold", "fontSize": 11, "color": "#555"},
       "encoding": {
         "x": {"field": "date", "type": "temporal"},
-        "y": {"field": "y", "type": "quantitative"},
-        "text": {"field": "label"}
+        "y": {"value": -10},
+        "text": {"value": "1971: New Economic Policy Launched"}
+      }
+    },
+    {
+      "data": {"values": [{"date": "1998-01-01"}]},
+      "mark": {"type": "text", "align": "center", "dx": 5, "fontWeight": "bold", "fontSize": 11, "color": "#555"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"value": -20},
+        "text": {"value": "1998: Asian Financial Crisis"}
+      }
+    },
+    {
+      "data": {"values": [{"date": "2020-01-01"}]},
+      "mark": {"type": "text", "align": "right", "dx": -5, "fontWeight": "bold", "fontSize": 11, "color": "#555"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"value": -10},
+        "text": {"value": "2020: COVID-19 Pandemic"}
       }
     }
-  ]
+  ],
+  "config": {
+    "title": { "font": "Arial, Helvetica, sans-serif", "offset": 45 },
+    "axis": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "legend": { "labelFont": "Arial, Helvetica, sans-serif", "titleFont": "Arial, Helvetica, sans-serif" },
+    "text": { "font": "Arial, Helvetica, sans-serif" }
+  }
 }
